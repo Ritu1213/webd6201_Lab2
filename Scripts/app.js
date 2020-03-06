@@ -241,6 +241,7 @@ let app;
         });
     }
 
+
     function DisplayProjectsContent()
     {
         document.title = "WEBD6201 - Projects";
@@ -266,6 +267,92 @@ let app;
     function DisplayRegisterContent()
     {
         document.title = "WEBD6201 - Register";
+        function clearForm()
+        {
+            //document.getElementById("registerForm").reset();
+            $("#registerForm")[0].reset();
+            $("#errorMessage").hide();
+            
+        }
+
+        function validateInput(selector, condition, errorMessage)
+        {
+            if(condition)
+            {
+                $("#errorMessage").show();
+                $("#errorMessage").text(errorMessage);
+                $(selector).select();
+                $(selector).css("border", "2px solid red");
+            }
+            else
+            {
+                $("#errorMessage").hide();
+                $(selector).css("border", "1px solid #ced4da");
+            }
+        }
+
+        $("#errorMessage").hide();
+        $("#firstName").select();
+
+        // First Name Events
+        $("#firstName").blur((e)=>
+        {
+            validateInput("#firstName",($("#firstName").val().length < 2), "First Name is too Short");
+
+        });
+
+        $("#firstName").focus((e)=>
+        {
+           $("#firstName").select();
+        });
+
+         // last Name Events
+         $("#lastName").blur((e)=>
+         {
+             validateInput("#lastName",($("#lastName").val().length < 2), "last Name is too Short");
+ 
+         });
+ 
+         $("#lastName").focus((e)=>
+         {
+            $("#lastName").select();
+         });
+
+         // Email Events
+        $("#emailAddress").blur((e)=>
+        {
+            validateInput("#emailAddress",($("#emailAddress").val().length < 8) || (!$("#emailAddress").val().includes("@")),"Invalid Email Address");
+        });
+
+        $("#emailAddress").focus((e)=>
+        {
+            $("#emailAddress").select();
+        });
+
+        // Password Events
+        $("#password").blur((e)=>
+        {
+            validateInput("#password",($("#password").val().length < 6), "Password should have atleast 6 characters.");
+
+        });
+
+        $("#password").focus((e)=>
+        {
+           $("#password").select();
+        });
+
+        // confirmPassword Events
+        $("#password").blur((e)=>
+        {
+            validateInput("#password",($("#password").val().length < 6), "Password should have atleast 6 characters.");
+
+        });
+
+        $("#confirmPassword").focus((e)=>
+        {
+           $("#password").select();
+        });
+
     }
 
     /**
