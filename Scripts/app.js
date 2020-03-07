@@ -1,5 +1,5 @@
 /***
- * @  author Name: Ritu Patel
+ * @ author Name: Ritu Patel
  * @ student ID: 100730021
  * @ date modified : February 5, 2020
  * @ This is the javascript file for webd6201 lab 2. 
@@ -16,6 +16,19 @@ class Contact
     }
 }
 
+class User
+{
+    constructor(firstName = "", lastName="",userName= "", emailAddress = "", password= "", confirmPassword="")
+    {
+        this.firstName = firstName;
+        this.lastName =  lastName;
+        this.userName = userName;
+        this.emailAddress = emailAddress;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+    }
+}
+
 
 
 
@@ -29,6 +42,9 @@ let app;
     // Declare Function Variables here...
     console.log("%cDeclaring Variables", "color: red;")
     let contactObject = new Contact();
+
+    console.log("%cDeclaring Variables", "color: red;")
+    let userName = new User();
 
     /**
      * Variable initialization in this function
@@ -199,7 +215,7 @@ let app;
         });
 
 
-        $("#contactForm").submit  ((e)=>
+        $("#contactForm").submit((e)=>
         {
             if(document.getElementById("contactForm").checkValidity() == false)
             {
@@ -258,6 +274,7 @@ let app;
             e.stopPropagation();
             $("#loginForm")[0].reset();
             $("#login").hide();
+            $("#userName").show();
             $("#logout").show();
 
         });
@@ -342,16 +359,53 @@ let app;
         });
 
         // confirmPassword Events
-        $("#password").blur((e)=>
+        $("#confirmPassword").blur((e)=>
         {
-            validateInput("#password",($("#password").val().length < 6), "Password should have atleast 6 characters.");
+            validateInput("#confirmPassword",($("#confirmPassword").val()!=$("#password").val()), "password and confirm password is not same,please enter again.");
 
         });
 
         $("#confirmPassword").focus((e)=>
         {
-           $("#password").select();
+           $("#confirmPassword").select();
         });
+
+        $("#registerForm").submit((e)=>
+        {
+            if(document.getElementById("registerForm").checkValidity() == false)
+            {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log("form not valid");
+            }
+
+
+            let firstName = $("#firstName").val();
+            let lastName = $("#lastName").val();
+            let userName = $("#contactName").val();
+            let emailAddress = $("#emailAddress").val();
+            let password = $("#password").val();
+            let confirmPassword = $("#confirmPassword").val();
+
+            console.log(`First Name: ${firstName}`);
+            console.log(`Last Name: ${lastName}`);
+            console.log(`User Name: ${userName}`);
+            console.log(`Email Address: ${emailAddress}`);
+            console.log(`password: ${password}`);
+            console.log(`Confirm Password: ${confirmPassword}`);
+
+            userName.firstName = firstName;
+            userName.lastName = lastName;
+            userName.userName = userName;
+            userName.emailAddress = emailAddress;
+            userName.password = password;
+            userName.confirmPassword = confirmPassword;
+
+            console.log(userName);
+
+            clearForm();
+        });
+
 
     }
 
